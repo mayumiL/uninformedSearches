@@ -1,3 +1,4 @@
+#!/usr/local/bin/python
 #Input
 ##height
 ##Initial config
