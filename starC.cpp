@@ -172,7 +172,7 @@ int main(int arg, char** argv){
 
 	do{
 		if(isInFrontier.empty()){
-			cout << "Frontier empty" << endl;
+			cout << "No solution found" << endl;
 			return -1;			
 		}
 
@@ -189,7 +189,7 @@ int main(int arg, char** argv){
 			}
 
 			while(!(solution.empty()) ){
-				cout << "(" << solution.top().first << "," << solution.top().second << ")  " << endl;
+				cout << "(" << solution.top().first << "," << solution.top().second << ") " << endl;
 				solution.pop();
 			}
 			return 1;
