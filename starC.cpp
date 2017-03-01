@@ -191,6 +191,9 @@ int main(int arg, char** argv){
 			while(!(solution.empty()) ){
 				cout << "(" << solution.top().first << ", " << solution.top().second << ")";
 				solution.pop();
+				if (!solution.empty()) {
+					cout << "; ";
+				}
 			}
 			return 0;
 		}
