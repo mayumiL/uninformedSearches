@@ -173,7 +173,7 @@ int main(int arg, char** argv){
 	do{
 		if(isInFrontier.empty()){
 			cout << "No solution found";
-			return -1;
+			return 0;
 		}
 
 		do{
@@ -192,7 +192,7 @@ int main(int arg, char** argv){
 				cout << "(" << solution.top().first << ", " << solution.top().second << ")";
 				solution.pop();
 			}
-			return 1;
+			return 0;
 		}
 
 		explored.insert(actualNode->state);

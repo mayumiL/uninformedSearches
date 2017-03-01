@@ -155,7 +155,7 @@ int main(int arg, char** argv){
 				cout << "(" << solution.top().first << "," << solution.top().second << ")";
 				solution.pop();
 			}
-			return 1;
+			return 0;
 		}
 
 		explored.insert(actualNode->state);
