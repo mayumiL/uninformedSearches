@@ -189,7 +189,7 @@ int main(int arg, char** argv){
 			}
 
 			while(!(solution.empty()) ){
-				cout << "(" << solution.top().first << ", " << solution.top().second << ") ";
+				cout << "(" << solution.top().first << ", " << solution.top().second << ")";
 				solution.pop();
 			}
 			return 1;

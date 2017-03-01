@@ -15,7 +15,7 @@ using namespace std;
 struct node{
 	std::vector<stack <char> > state;
 	struct node *parent;
-	std::pair<int,int>  action; 
+	std::pair<int,int>  action;
 	int gCost, hCost;
 };
 
@@ -28,12 +28,12 @@ struct compare{
 int goalA(vector<stack <char> > actual, vector<stack <char> > goal){
 	int i, j, res = 1;
 
-	for(i = 0; i < goal.size(); i++){		
+	for(i = 0; i < goal.size(); i++){
 		if( goal[i].size() > 0 && goal[i].top() == 'X'){
 			goal[i].pop();
 			continue;
-		}else if(actual[i].size() != goal[i].size()){			
-			return 0;				
+		}else if(actual[i].size() != goal[i].size()){
+			return 0;
 		}while( goal[i].size() > 0){
 			if(actual[i].top() != goal[i].top()){
 				return 0;
@@ -45,10 +45,10 @@ int goalA(vector<stack <char> > actual, vector<stack <char> > goal){
 	return res;
 }
 
-int expandNode(struct node **child, struct node *parent, pair<int,int> action, int limit){	
+int expandNode(struct node **child, struct node *parent, pair<int,int> action, int limit){
 	char aux;
 	//Para que solo expanda nodos validos
-	if( !(parent->state[action.first].empty()) && (parent->state[action.second].size() < limit)){		
+	if( !(parent->state[action.first].empty()) && (parent->state[action.second].size() < limit)){
 		(*child) = new node;
 		(*child)->parent = parent;
 		(*child)->state = parent->state;
@@ -83,12 +83,12 @@ int main(int arg, char** argv){
 
 	set < vector<stack <char> > > explored;
 	set < vector<stack <char> > >::iterator itExplored;
-	
+
 	struct node *root = new node;
 	struct node *actualNode = new node;
 	struct node *childNode = new node;
 
-	cin >> maxHeight; 
+	cin >> maxHeight;
 	getline(cin,init);
 	getline(cin,init);
 	getline(cin,goal);
@@ -124,7 +124,7 @@ int main(int arg, char** argv){
 		}
 	}
 	while(!temp.empty()){temp.pop();}
-		
+
 
 	root->hCost = root->gCost*2;
 
@@ -136,14 +136,14 @@ int main(int arg, char** argv){
 	do{
 		if(isInFrontier.empty()){
 			cout << "Frontier empty" << endl;
-			return -1;			
+			return -1;
 		}
 
 		do{
 			actualNode = frontier.top();
 			frontier.pop();
-		}while(isInFrontier.erase(actualNode->state) != 1);  
-				
+		}while(isInFrontier.erase(actualNode->state) != 1);
+
 		if(goalA(actualNode->state, goalState) == 1){
 			cout << actualNode->gCost << endl;
 			while(actualNode->parent != NULL){
@@ -152,23 +152,23 @@ int main(int arg, char** argv){
 			}
 
 			while(!(solution.empty()) ){
-				cout << "(" << solution.top().first << "," << solution.top().second << ")  " << endl;
+				cout << "(" << solution.top().first << "," << solution.top().second << ")";
 				solution.pop();
 			}
 			return 1;
 		}
-		
+
 		explored.insert(actualNode->state);
 
 		for(i = 0; i < goalState.size(); i++){
 			for(j = 0; j < goalState.size(); j++){
-				if(i != j){				
-					action = make_pair(i, j); 					
+				if(i != j){
+					action = make_pair(i, j);
 					if(expandNode(&childNode, actualNode, action, maxHeight) == 1){
 						childNode->hCost = childNode->gCost*2;
 						itExplored = explored.find(childNode->state);
 						itFrontier = isInFrontier.find(childNode->state);
-						if(itExplored == explored.end()){					
+						if(itExplored == explored.end()){
 							frontier.push(childNode);
 							isInFrontier.insert( map< vector<stack <char> >, int >::value_type(childNode->state, childNode->gCost + childNode->hCost) );
 						}
@@ -176,13 +176,13 @@ int main(int arg, char** argv){
 							isInFrontier.erase(itFrontier);
 							frontier.push(childNode);
 							isInFrontier.insert( map< vector<stack <char> >, int >::value_type(childNode->state, childNode->gCost + childNode->hCost) );
-					
+
 						}
 					}
 				}
 			}
 		}
 	}while(frontier.size() > 0);
-	cout << "No solution found" << endl;
+	cout << "No solution found";
 	return 0;
 }
